@@ -1,1 +1,1 @@
-<wxparse data="{{ html }}"></wxparse>
+<wxparse data="{{ html }}" emoji></wxparse>
