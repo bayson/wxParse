@@ -22,13 +22,14 @@
 
 #### 2. 在页面wxml中
 ```html
-<wxparse data="{{ html }}" type="html" padding="5" url-prefix="https://static.demo.com"></wxparse>
+<wxparse data="{{ html }}" type="html" padding="5" url-prefix="https://static.demo.com" emoji></wxparse>
 ```
 属性说明：
 - data： 要渲染到页面的数据
 - type： 要渲染数据的类型（html或者md）
 - padding: 渲染后的图片内距
 - url-prefix: 渲染图片时的固定url前缀
+- emoji: 布尔类型,是否启用emoji替换
 
 ### 插件方式
 > 如果使用插件方式，请注意插件更新提醒。一般比源代码修改慢1-2天。
@@ -80,6 +81,9 @@
 - 后端html转json插件
 
 ## 更新日志
+- 2019-05-17
+    - issue #11 添加id属性的问题
+    - issue #12 插件不支持表情的问题
 - 2019-04-04
     - 放弃对于issue#6的修改（避免由此带来的issue#7问题，并且我发现那段代码放在浏览器都没有办法解析，我还是不折腾了😂）
     - 添加对于ruby,rt标签的简单支持`<ruby>拼音<rt>pinyin</rt></ruby>`将展示为`拼音(pinyin)`

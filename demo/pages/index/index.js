@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    carouselPosts: [],
     posts: [],
     loading: {
       show: false,
@@ -39,35 +40,12 @@ Page({
         self.setData({
           posts: self.data.posts.concat(res.data.data)
         });
+        if (!self.data.carouselPosts.length) {
+          self.setData({
+            carouselPosts: self.data.posts.slice(0, 5)
+          });
+        }
       });
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
   },
 
   /**
@@ -89,12 +67,5 @@ Page({
       self.data.page += 1;
       self.loadPosts(self.data.page);
     }
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
-})
+});

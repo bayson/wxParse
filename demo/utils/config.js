@@ -1,5 +1,5 @@
 const config = {
-  baseUrl: 'https://www.iian.xyz/api',
+  baseUrl: 'https://www.dnote.cn/api',
   miniprogram_id: 2
 };
 

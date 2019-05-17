@@ -131,6 +131,9 @@ class HtmlToJson
                             //  value = value.join("")
                             node.styleStr = value;
                         }
+                        if (name == 'id') {
+                          node.id = value;
+                        }
                         if (value.match(/ /)) {
                             value = value.split(' ');
                         }

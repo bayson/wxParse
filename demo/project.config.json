@@ -26,6 +26,8 @@
 		"beforePreview": "",
 		"beforeUpload": ""
 	},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -50,7 +52,7 @@
 					"id": 0,
 					"name": "详情页面",
 					"pathName": "pages/detail/detail",
-					"query": "id=71",
+					"query": "id=75",
 					"scene": null
 				},
 				{
@@ -65,6 +67,13 @@
 					"name": "图片分享",
 					"pathName": "pages/share/share",
 					"query": "content=人生苦短，我用python",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "扫码登录",
+					"pathName": "pages/weblogin/weblogin",
+					"query": "",
 					"scene": null
 				}
 			]

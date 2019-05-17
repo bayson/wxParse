@@ -1,4 +1,5 @@
 import wxs from '../../utils/wxs.js';
+import weblogin from '../../api/weblogin.js';
 
 Page({
 
@@ -6,72 +7,45 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    scene: {}
   },
 
   /**
    * 退出小程序
    */
   handleCancle: function () {
-    console.log('aa')
     wx.navigateBack({
       delta: 1
-    })
+    });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const self = this;
+    options.scene = encodeURIComponent('login=djfalksdfsdkf');
+    
+    let scene = decodeURIComponent(options.scene);
+    self.data.scene = scene.split('=');
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 确认登录网页
    */
-  onReady: function () {
+  handleTapLogin: function () {
+    const self = this;
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    wxs.login()
+      .then(res => { return res.code; })
+      .then(res => { return weblogin.bindUser({ code: res, token: self.data.scene[1] }); })
+      .then(res => { wx.navigateBack({ delta: 1 }); })
+      .catch(err => {
+        wx.showModal({
+          title: '抱歉',
+          content: err.errMsg,
+          showCancel: false
+        });
+      });
   }
-})
+});

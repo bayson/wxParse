@@ -6,7 +6,7 @@
   interval="3000"
   circular="true"
   indicator-dots="true">
-  <swiper-item wx:for="{{ posts }}" wx:key="{{ item.id }}" wx:if="{{ item.images.length > 0 }}">
+  <swiper-item wx:for="{{ carouselPosts }}" wx:key="{{ item.id }}" wx:if="{{ item.images.length > 0 }}">
     <navigator wx:if="{{ item && item.title }}" url="../detail/detail?id={{ item.id }}">
       <image src="{{ item.images[0] }}"></image>
     </navigator>
@@ -22,7 +22,7 @@
         <image wx:for="{{ item.images }}" wx:key="{{ index }}" src="{{ item }}" mode="aspectFit" lazy-load></image>
       </view>
 
-      <view class="post-desc" wx:if="{{ item.images.length < 3 && item.images.length == 1 }}">
+      <view class="post-desc" wx:if="{{ item.images.length < 3 && item.images.length >= 1 }}">
         <image wx:for="{{ item.images }}" wx:key="{{ index }}" src="{{ item }}" mode="aspectFit" lazy-load></image>
         <view>{{ item.description }}</view>
       </view>
