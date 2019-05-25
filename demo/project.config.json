@@ -14,7 +14,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.0",
+	"libVersion": "2.7.0",
 	"appid": "wxf5fc4948fa064936",
 	"projectname": "ian%E6%9C%89%E8%AF%9D%E8%AF%B4",
 	"debugOptions": {
@@ -52,7 +52,7 @@
 					"id": 0,
 					"name": "详情页面",
 					"pathName": "pages/detail/detail",
-					"query": "id=75",
+					"query": "id=82",
 					"scene": null
 				},
 				{
