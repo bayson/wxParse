@@ -1,6 +1,7 @@
 {
   "publicComponents": {
-    "wxparse": "components/wxparse/wxparse"
+    "wxparse": "components/wxparse/wxparse",
+    "img": "components/wxparse/img/img"
   },
   "main": "index.js"
 }

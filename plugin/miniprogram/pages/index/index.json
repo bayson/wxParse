@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "wxparse": "plugin://wxparse/wxparse"
+    "wxparse": "plugin://wxparse/wxparse",
+    "img": "plugin://wxparse/img"
   }
 }

@@ -1,1 +1,4 @@
-<wxparse data="{{ html }}" emoji></wxparse>
+<wxparse data="{{ html }}" emoji bindtapimg="handleTapImage" bindloadimg="handleLoadImage" bindloadimgerr="handleLoadImageError" default-img="https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jpeg"></wxparse>
+
+<!-- <view>下面是img组件</view> -->
+<!-- <img src="https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jp" default="https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jpeg" mode="aspectFit" load="http://img.zcool.cn/community/01eabe57ae94ff0000018c1b6b1ff3.gif" lazy-load="true"></img> -->

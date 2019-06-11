@@ -7,8 +7,7 @@
 </template>
 
 <template name="wxParseImg">
-  <image class="{{item.classStr}} wxParse-{{item.tag}}" data-from="{{item.from}}" data-src="{{item.attr.src}}" data-idx="{{item.imgIndex}}" src="{{item.attr.src}}"  bindload="wxParseImgLoad" bindtap="wxParseImgTap" mode="widthFix" style="width:{{item.width}}px;" id="{{ item.id ? item.id : '' }}"
-  />
+  <img class="{{item.classStr}} wxParse-{{item.tag}}" data-from="{{item.from}}" data-src="{{item.attr.src}}" data-idx="{{item.imgIndex}}" src="{{item.attr.src}}"  bindloadimg="handleLoadWxparseImg" bindloadimgerr="handleLoadWxparseImgError" bindtapimg="handleTapWxparseImg" mode="widthFix" style="width:{{item.width}}px;" id="{{ item.id ? item.id : '' }}" default="{{ item.default }}"/>
 </template>
 
 <template name="WxEmojiView">

@@ -65,8 +65,10 @@ class HtmlToJson
      * 
      * @param html string 
      * @param bindName string
+     * @param baseImageUrl 图片的固定前缀
+     * @param defaultImg 图片加载出错时的默认图片
      */
-    static html2json(html, bindName, baseImageUrl) {
+  static html2json(html, bindName, baseImageUrl, defaultImg) {
         // 处理字符串
       html = HtmlToJson.removeDOCTYPE(html);
       html = HtmlToJson.trimHtml(html);
@@ -167,6 +169,7 @@ class HtmlToJson
                     imgUrl = wxDiscode.urlToHttpUrl(imgUrl, __placeImgeUrlHttps);
                     node.attr.src = imgUrl;
                     node.from = bindName;
+                    node.default = defaultImg;
                     results.images.push(node);
                     results.imageUrls.push(imgUrl);
                 }

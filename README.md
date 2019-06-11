@@ -1,74 +1,15 @@
-# wxParse
-微信小程序富文本解析组件
+# ianzhi/wxParse
+文档放在这里太长了，安装和使用方法到这里查看吧。
+[文档地址](https://www.dnote.cn/users/ianzhi/posts/wxParsewendang)
 
-> 公司做小程序需要在小程序中渲染html，采用了wxParse库，但是在使用过程中，发现这个库可能不是那么完善，还有一些问题，访问github仓库发现代码已经很久没有维护了。
-> 接下来可能会修复一些已经发现的问题，这里共享一下修改后的代码，以方便有需要的人。
-
-## 关于组件
-- 本项目使用[icindy/wxParse](https://github.com/icindy/wxParse)代码二次开发。
-- 欢迎issue，欢迎pr。
-- 组件使用了lifetimes属性，请确保基础库版本`>=`2.2.3。如果需要支持`2.2.3`以下版本，将生命周期函数复制到Component构造器的第一级参数中即可。
-
-## 使用方式
-### 复制源代码方式 
-#### 1. 在需要使用组件的配置文件上添加组件
-```json
-{
-  "usingComponents": {
-    "wxparse": "/path/to/wxparse/wxparse"
-  }
-}
-```
-
-#### 2. 在页面wxml中
-```html
-<wxparse data="{{ html }}" type="html" padding="5" url-prefix="https://static.demo.com" emoji></wxparse>
-```
+## 可用属性
 属性说明：
 - data： 要渲染到页面的数据
 - type： 要渲染数据的类型（html或者md）
 - padding: 渲染后的图片内距
 - url-prefix: 渲染图片时的固定url前缀
 - emoji: 布尔类型,是否启用emoji替换
-
-### 插件方式
-> 如果使用插件方式，请注意插件更新提醒。一般比源代码修改慢1-2天。
-#### 1. 微信公众平台后台添加插件
-搜索`htmlparse`,之后添加。
-#### 2. 小程序配置(app.json)中添加插件
-```json
-{
-  "plugins": {
-    ...,
-    "wxparse": {
-      "version": "1.0.1",
-      "provider": "wx5d60c080635009b1"
-    },
-    ...
-}
-```
-#### 3. 在需要使用的页面添加组件
-```json
-{
-  ...,
-  "usingComponents": {
-    "wxparse": "plugin://wxparse/wxparse"
-  },
-  ...
-}
-```
-#### 4. 在wxml中使用组件
-```html
-<wxparse data="{{ article.content_html }}"></wxparse>
-```
-
-### 4. 关于代码高亮
-- 代码高亮使用highlight.js
-- 对于其他语言的支持，请直接到[这里](https://github.com/highlightjs/highlight.js/blob/master/src/languages)查看所有支持的语言
-- 其他的皮肤主题，请到[这里](https://github.com/highlightjs/highlight.js/blob/master/src/styles)查看所有的主题。
-- 添加支持的语言需要在语言的function关键字前添加`export default`
-- 需要在src/highlight/hljs中注册语言
-- 主题文件需要在wxparse.wxss中引入
+- default-img: 图片加载失败时默认占位图
 
 ## 小程序示例
 > 微信小程序更新会慢于组件更新，主要在于微信小程序的审核时间。更新状态请以更新日志为准。
@@ -81,6 +22,8 @@
 - 用text装代码块比较好
 
 ## 更新日志
+- 2019-06-11
+    - issue #14 图片加载失败时，设置默认占位图
 - 2019-05-25
     - 修复issue #13，wxss中使用了插件禁止使用的选择器问题
 - 2019-05-18

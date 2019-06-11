@@ -39,6 +39,13 @@ Component({
       observer: function () {
         this.render();
       }
+    },
+    defaultImg: {
+      type: String,
+      value: '',
+      observer: function () {
+        this.render();
+      }
     }
   },
 
@@ -72,13 +79,21 @@ Component({
     /**
      * 图片视觉宽高计算函数区 
      */
-    wxParseImgLoad: function (e) {
+    handleLoadWxparseImg: function (e) {
       var that = this;
       var tagFrom = e.target.dataset.from;
       var idx = e.target.dataset.idx;
       if(typeof (tagFrom) != 'undefined' && tagFrom.length > 0) {
         that.calMoreImageInfo(e, idx, that, tagFrom);
-      } 
+      }
+      that.triggerEvent('loadimg', e);
+    },
+
+    /**
+     * 图片加载出错事件
+     */
+    handleLoadWxparseImgError: function (e) {
+      this.triggerEvent('loadimgerr', e);
     },
 
     /**
@@ -131,17 +146,26 @@ Component({
     },
 
     // 图片点击事件
-    wxParseImgTap: function (e) {
+    handleTapWxparseImg: function (e) {
       const self = this;
 
       var nowImgUrl = e.target.dataset.src;
       var tagFrom = e.target.dataset.from;
-      if(typeof (tagFrom) != 'undefined' && tagFrom.length > 0) {
+      
+      let urls = [];
+      if (typeof (tagFrom) != 'undefined' && tagFrom.length > 0) {
+        urls = self.data[tagFrom].imageUrls;
+        
         wx.previewImage({
           current: nowImgUrl, // 当前显示图片的http链接
           urls: self.data[tagFrom].imageUrls // 需要预览的图片http链接列表
-        })
+        });
       }
+
+      self.triggerEvent('tapimg', {
+        url: e.target.dataset.src,
+        urls: urls
+      });
     },
 
     /**
@@ -173,7 +197,7 @@ Component({
           "19": "19.gif",
         });
       }
-      wxparse.parse('article', this.properties.type, this.properties.data, this, this.properties.padding, this.properties.urlPrefix);
+      wxparse.parse('article', this.properties.type, this.properties.data, this, this.properties.padding, this.properties.urlPrefix, this.properties.defaultImg);
     },
 
     /**
