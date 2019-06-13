@@ -1,31 +1,38 @@
 import config from './config.js';
 
+/**
+ * HTML解析器
+ * @param html 需要解析的html内容
+ * @param handler 解析处理器
+ * @constructor
+ */
 function HTMLParser(html, handler) {
-	var index, chars, match, stack = [], last = html;
+	var index, chars, match, stack = [],last = html;
 
 	stack.last = function () {
 		return this[this.length - 1];
 	};
 
 	while (html) {
-    chars = true;
+    	chars = true;
     
-		// Make sure we're not in a script or style element
+		// 如果栈为空或者没有在特殊节点（script,style）中
 		if (!stack.last() || !config.elements.special[stack.last()]) {
-      
-			// Comment  
-      if (html.indexOf("<!--") == 0) {
+      		if (html.indexOf("<!--") === 0) {
+				/**
+				 * 处理注释
+				 * 1. 将注释内容交给注释处理器
+				 * 2. 截取整个注释内容
+				 */
 				index = html.indexOf("-->");
-
 				if (index >= 0) {
-					if (handler.comment)
+					if (handler.comment) {
 						handler.comment(html.substring(4, index));
+					}
 					html = html.substring(index + 3);
 					chars = false;
 				}
-
-				// end tag
-      } else if (html.indexOf("</") == 0) {
+      		} else if (html.indexOf("</") === 0) {
 				match = html.match(config.reg.endTag);
 
 				if (match) {
@@ -33,47 +40,49 @@ function HTMLParser(html, handler) {
 					match[0].replace(config.reg.endTag, parseEndTag);
 					chars = false;
 				}
-
-				// start tag
-			} else if (html.indexOf("<") == 0) {
+			} else if (html.indexOf("<") === 0) {
 				match = html.match(config.reg.startTag);
-        if (match) {
-          html = html.substring(match[0].length);
-          match[0].replace(config.reg.startTag, parseStartTag);
+        		if (match) {
+          			html = html.substring(match[0].length);
+          			match[0].replace(config.reg.startTag, parseStartTag);
 					chars = false;
 				}
 			}
 
 			if (chars) {
+				/**
+				 * 如果不是开始、结束或者注释标签
+				 * 交给字符串处理器
+				 * @type {number}
+				 */
 				index = html.indexOf("<");
 				var text = ''
 				while (index === 0) {
-          text += "<";
-          html = html.substring(1);
-          index = html.indexOf("<");
+          			text += "<";
+          			html = html.substring(1);
+          			index = html.indexOf("<");
 				}
 				text += index < 0 ? html : html.substring(0, index);
 				html = index < 0 ? "" : html.substring(index);
 
-				if (handler.chars)
+				if (handler.chars) {
 					handler.chars(text);
+				}
 			}
 		} else {
-
 			html = html.replace(new RegExp("([\\s\\S]*?)<\/" + stack.last() + "[^>]*>"), function (all, text) {
 				text = text.replace(/<!--([\s\S]*?)-->|<!\[CDATA\[([\s\S]*?)]]>/g, "$1$2");
 				if (handler.chars)
 					handler.chars(text);
-
 				return "";
 			});
-
 
 			parseEndTag("", stack.last());
 		}
 
-		if (html == last)
+		if (html === last) {
 			throw "Parse Error: " + html;
+		}
 		last = html;
 	}
 
@@ -90,7 +99,7 @@ function HTMLParser(html, handler) {
 			}
 		}
 
-		if (config.elements.closeSelf[tagName] && stack.last() == tagName) {
+		if (config.elements.closeSelf[tagName] && stack.last() === tagName) {
 			parseEndTag("", tagName);
 		}
 
@@ -122,17 +131,28 @@ function HTMLParser(html, handler) {
 		}
 	}
 
+	/**
+	 * 解析结束标签
+	 * @param tag
+	 * @param tagName
+	 */
 	function parseEndTag(tag, tagName) {
+		/**
+		 * 1. 如果没有标签名，设定pos为0
+		 * 2. 在栈中查找与当前结束标签名相同的标签，获取到其pos
+		 * 3. 如果pos大于等于0，将栈中此标签开始标签以后的所有标签逐个交给end处理器处理
+		 * 4， 从栈中删除开始标签
+		 */
 		// If no tag name is provided, clean shop
-		if (!tagName)
+		if (!tagName) {
 			var pos = 0;
-
-		// Find the closest opened tag of the same type
-		else {
+		} else {
+			// Find the closest opened tag of the same type
 			tagName = tagName.toLowerCase();
-			for (var pos = stack.length - 1; pos >= 0; pos--)
-				if (stack[pos] == tagName)
+			for (var pos = stack.length - 1; pos >= 0; pos--) {
+				if (stack[pos] === tagName)
 					break;
+			}
 		}
 		if (pos >= 0) {
 			// Close all the open elements, up the stack
@@ -144,6 +164,6 @@ function HTMLParser(html, handler) {
 			stack.length = pos;
 		}
 	}
-};
+}
 
 export default HTMLParser;

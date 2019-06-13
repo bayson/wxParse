@@ -60,7 +60,8 @@ https://highlightjs.org/
   /* Utility functions */
 
   function escape(value) {
-    return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    // return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return value;
   }
 
   function tag(node) {
@@ -374,7 +375,8 @@ https://highlightjs.org/
   */
   function highlight(name, value, ignore_illegals, continuation) {
     function escapeRe(value) {
-      return new RegExp(value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'm');
+      // return new RegExp(value.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'm');
+      return new RegExp(value.replace('', ''), 'm');
     }
 
     function subMode(lexeme, mode) {
@@ -614,7 +616,8 @@ https://highlightjs.org/
     languageSubset = languageSubset || options.languages || objectKeys(languages);
     var result = {
       relevance: 0,
-      value: escape(text)
+      // value: escape(text)
+      value: text
     };
     var second_best = result;
     languageSubset.filter(getLanguage).filter(autoDetection).forEach(function(name) {

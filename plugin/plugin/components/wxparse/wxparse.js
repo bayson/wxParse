@@ -172,32 +172,29 @@ Component({
      * 渲染
      */
     render: function () {
-      if (this.properties.emoji) {
-        wxparse.emojisInit('[]', "./wxparse/emojis/", {
-          "00": "00.gif",
-          "01": "01.gif",
-          "02": "02.gif",
-          "03": "03.gif",
-          "04": "04.gif",
-          "05": "05.gif",
-          "06": "06.gif",
-          "07": "07.gif",
-          "08": "08.gif",
-          "09": "09.gif",
-          "09": "09.gif",
-          "10": "10.gif",
-          "11": "11.gif",
-          "12": "12.gif",
-          "13": "13.gif",
-          "14": "14.gif",
-          "15": "15.gif",
-          "16": "16.gif",
-          "17": "17.gif",
-          "18": "18.gif",
-          "19": "19.gif",
-        });
-      }
-      wxparse.parse('article', this.properties.type, this.properties.data, this, this.properties.padding, this.properties.urlPrefix, this.properties.defaultImg);
+      const self = this;
+
+      let parse = new wxparse(self.properties.data, self, {
+        type: self.properties.type,
+        bindName: 'article',
+        image: {
+          default: self.properties.defaultImg,
+          prefix: self.properties.urlPrefix,
+          padding: self.properties.padding
+        },
+        emoji: self.properties.emoji
+      });
+      parse.render();
+
+      // wxparse.parse(
+      //     'article',
+      //     this.properties.type,
+      //     this.properties.data,
+      //     this,
+      //     this.properties.padding,
+      //     this.properties.urlPrefix,
+      //     this.properties.defaultImg
+      // );
     },
 
     /**
@@ -207,4 +204,4 @@ Component({
       wx.setClipboardData({ data: e.currentTarget.dataset.src });
     }
   }
-})
+});

@@ -117,7 +117,6 @@ const showdown = {
             return (typeof a === 'string' || a instanceof String);
         },
 
-
         /**
          * Check if var is a function
          * @static

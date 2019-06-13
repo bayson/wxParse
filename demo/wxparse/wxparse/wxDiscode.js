@@ -107,13 +107,9 @@ function strcharacterDiscode(str){
     str = str.replace(/&nbsp;/g, ' ');
     str = str.replace(/&quot;/g, "'");
     str = str.replace(/&amp;/g, '&');
-    // str = str.replace(/&lt;/g, '‹');
-    // str = str.replace(/&gt;/g, '›');
-
     str = str.replace(/&lt;/g, '<');
     str = str.replace(/&gt;/g, '>');
     str = str.replace(/&#8226;/g, '•');
-
     return str;
 }
 
@@ -177,10 +173,9 @@ function strOtherDiscode(str){
 }
 
 function strMoreDiscode(str){
-    str = str.replace(/\r\n/g,"<br/>");  
-    str = str.replace(/\n/g,"");
-
-    str = str.replace(/code/g,"wxxxcode-style");
+    str = str.replace(/\r\n/g,"\n");
+    // str = str.replace(/\n/g,"");
+    // str = str.replace(/code/g,"wxxxcode-style");
     return str;
 }
 
@@ -205,5 +200,6 @@ function urlToHttpUrl(url,rep){
 export default {
     strDiscode,
     urlToHttpUrl,
-  strOtherDiscode
+  strOtherDiscode,
+    strcharacterDiscode
 }

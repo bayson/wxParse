@@ -1,6 +1,6 @@
 Page({
   data: {
-    html: "<span>aaaaaaaaaaaa</span><ruby>拼音<rt>pinyin</rt></ruby>issue#8<span>aaaaaaaaaaa</span>[01]<pre><code>$a = 'c';$b = 'd'; echo $a . $d;</code></pre><img src='https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jp' />",
+    html: "<span>aaaaaaaaaaaa</span><ruby>拼音<rt>pinyin</rt></ruby>issue#8<span>aaaaaaaaaaa</span>[01][100]<pre><code><?php\r\n$a = 'c';\r\n$b = 'd';\r\necho $a . $d;\r\n?></code></pre><code>$a=c;</code><img src='https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jp' />",
 
     his: "<span style='font-family: 'PingFang SC'; color: rgb(51, 51, 51); background: rgb(255, 255, 255);'>issue#6</span><br/><img src='https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jpeg'>issue#7"
   },

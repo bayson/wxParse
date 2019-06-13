@@ -82,18 +82,19 @@
 .wxParse-i,.wxParse-cite,.wxParse-em,.wxParse-var,.wxParse-address{font-style:italic}
 .wxParse-pre,.wxParse-tt,.wxParse-code,.wxParse-kbd,.wxParse-samp{font-family:monospace}
 .wxParse-pre{
+  display: block;
   overflow-x: scroll;
   white-space:pre;
-  margin: 10rpx 0;
   border: 1px solid #eee;
+  padding: 0.5rem;
+  width: 100%;
 }
 .wxParse-big{font-size:1.17em}
 .wxParse-small,.wxParse-sub,.wxParse-sup{font-size:.83em}
 .wxParse-sub{vertical-align:sub}
 .wxParse-sup{vertical-align:super}
 .wxParse-s,.wxParse-strike,.wxParse-del{text-decoration:line-through}
-/*wxparse-自定义个性化的css样式*/
-/*增加video的css样式*/
+
 .wxParse-strong,.wxParse-s{display: inline}
 .wxParse-a{
     -webkit-overflow-scrolling: touch;
@@ -125,9 +126,9 @@
     border-left: 3px solid #dbdbdb;
 }
 
-.wxParse-code,.wxParse-wxxxcode-style{
+/*.wxParse-code,.wxParse-wxxxcode-style{
     display: inline;
-}
+}*/
 
 .wxParse-li,.wxParse-li-inner{
     display: flex;

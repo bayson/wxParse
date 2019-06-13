@@ -1,44 +1,82 @@
-/**
- * 微信小程序html渲染
- */
 import showdown from './showdown.js';
 import htmlToJson from './html2json.js';
 
 class WxParse
 {
   /**
-   * 解析并渲染数据
-   *
-   * @param bindName 绑定的变量
-   * @param type 将要解析的数据类型
-   * @param data 将要解析的数据
-   * @param target 微信小程序页面或者组件构造对象
-   * @param imagePadding 图片渲染内距
-   * @param baseImageUrl 图片固定前缀
-   * @param defaultImg 图片加载出错时的默认占位图
+   * 默认配置
+   * @type Object
    */
-  static parse(bindName = 'wxParseData', type = 'html', data = '<div class="color:red;">数据不能为空</div>', target, imagePadding, baseImageUrl = '', defaultImg = '') {
+  static config = {
+    type: 'html', // 原始数据的类型，可选值markdown/md/html
+    bindName: 'wxParseData', // 绑定的组件或者页面变量
+    image: { // 解析图片时的一些扩展配置
+      padding: 0,
+      default: '',
+      prefix: ''
+    },
+    emoji: false // 是否将符号转义为emoji表情
+  };
+
+  /**
+   * 构造方法，构造解析类对象
+   * 通过传入的配置信息，确定解析流程
+   * @param data String 要解析的原始数据,markdown或者html字符串
+   * @param target Object 小程序页面或者组件对象
+   * @param config Object 配置
+   */
+  constructor (data, target, config={}) {
+    this.data = this.html = data;
+    this.target = target;
+    this.config = Object.assign({}, WxParse.config, config);
+  }
+
+  /**
+   * 解析并渲染数据
+   */
+  render () {
+    const self = this;
     const bindData = {};
 
-    if (type === 'html') {
-      bindData[bindName] = htmlToJson.html2json(data, bindName, baseImageUrl, defaultImg);
-    } else if (type === 'md' || type === 'markdown') {
+    // 准备用于渲染的数据
+    if (self.config.type === 'md' || self.config.type === 'markdown') {
       let converter = new showdown.Converter();
-      bindData[bindName] = htmlToJson.html2json(converter.makeHtml(data), bindName,baseImageUrl, defaultImg);
+      self.html = converter.makeHtml(self.data);
     }
-    bindData[bindName].view = {};
-    bindData[bindName].view.imagePadding = typeof (imagePadding) != 'undefined' ? imagePadding : 0;
-    console.log(bindData)
-    target.setData(bindData);
-    target.triggerEvent('rendered');
+    bindData[self.config.bindName] = htmlToJson.html2json(self.html, self.config.bindName, self.config.image.prefix, self.config.image.default);
+    bindData[self.config.bindName].view = {};
+    bindData[self.config.bindName].view.imagePadding = typeof (imagePadding) != 'undefined' ? imagePadding : 0;
+
+    if (self.config.emoji) {
+      this.setEmoji();
+    }
+
+    // 渲染并触发渲染完成事件
+    self.target.setData(bindData);
+    self.target.triggerEvent('rendered');
+  }
+
+  /**
+   * 设置开启emoji
+   */
+  setEmoji () {
+    let obj = {};
+    for (let i = 0; i <= 134; i++) {
+      let index = i;
+      if (i < 10) {
+        index = "0" + i;
+      }
+      obj[index] = index + ".gif";
+    }
+    htmlToJson.emojisInit('[]', "./wxparse/emojis/", obj);
   }
 
   static wxParseTemArray(temArrayName, bindNameReg, total, that) {
-    var array = [];
-    var temData = that.data;
-    var obj = null;
-    for (var i = 0; i < total; i++) {
-      var simArr = temData[bindNameReg + i].nodes;
+    let array = [];
+    let temData = that.data;
+    let obj = null;
+    for (let i = 0; i < total; i++) {
+      let simArr = temData[bindNameReg + i].nodes;
       array.push(simArr);
     }
 
@@ -46,13 +84,6 @@ class WxParse
     obj = JSON.parse('{"' + temArrayName + '":""}');
     obj[temArrayName] = array;
     that.setData(obj);
-  }
-
-  /**
-   * 配置emoji
-   */
-  static emojisInit(reg = '', baseSrc = "/wxParse/emojis/", emojis) {
-    htmlToJson.emojisInit(reg, baseSrc, emojis);
   }
 }
 

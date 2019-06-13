@@ -13,67 +13,22 @@ var __emojis = {};
 
 class HtmlToJson
 {
-  /**
-   * 移除内容中的文档声明
-   * 
-   * @param html string
-   */
-    static removeDOCTYPE(html) {
-        return html
-            .replace(/<\?xml.*\?>\n/, '')
-            .replace(/<.*!doctype.*\>\n/, '')
-            .replace(/<.*!DOCTYPE.*\>\n/, '');
-    }
-
-    /**
-     * 删除注释内容
-     * 重置代码块
-     * 替换代码块换行为<br/>标签
-     * 
-     * @param html string
-     */
-  static trimHtml(html) {
-     html = html
-      .replace(/<!--.*?-->/ig, '')
-      .replace(/\/\*.*?\*\//ig, '')
-      .replace(/(<code[\s\S]*>)(([\s\S])*?)(<\/code>)/g, function (e) {
-        let code = arguments[2];
-        let disCode = wxDiscode.strOtherDiscode(code);
-        let highLightCode = hljs.highlightAuto(disCode).value;
-        
-        return e.replace(code, highLightCode);
-      })
-      // .replace(/[ ]+</ig, '<');
-      return html;
-  }
-
-  /**
-   * 配置emoji表情
-   * 
-   * @param reg pattern
-   * @param baseSrc string
-   * @param emojis object
-   */
-  static emojisInit(reg='', baseSrc="/wxParse/emojis/", emojis) {
-      __emojisReg = reg;
-      __emojisBaseSrc=baseSrc;
-      __emojis=emojis;
-  }
 
     /**
      * 解析html为json对象
-     * 
-     * @param html string 
-     * @param bindName string
+     *
+     * @param html string 待解析的html内容
+     * @param bindName string 绑定的变量
      * @param baseImageUrl 图片的固定前缀
      * @param defaultImg 图片加载出错时的默认图片
      */
-  static html2json(html, bindName, baseImageUrl, defaultImg) {
+    static html2json(html, bindName, baseImageUrl, defaultImg) {
         // 处理字符串
-      html = HtmlToJson.removeDOCTYPE(html);
-      html = HtmlToJson.trimHtml(html);
-      html = wxDiscode.strDiscode(html);
-      
+        html = HtmlToJson.removeDOCTYPE(html);
+        html = HtmlToJson.trimHtml(html);
+        html = HtmlToJson.formatCode(html);
+        html = wxDiscode.strDiscode(html);
+
         //生成node节点
         var bufArray = [];
         var results = {
@@ -85,8 +40,6 @@ class HtmlToJson
         var index = 0;
         HTMLParser(html, {
             start: function (tag, attrs, unary) {
-                //debug(tag, attrs, unary);
-                // node for this element
                 var node = {
                     node: 'element',
                     tag: tag,
@@ -114,27 +67,24 @@ class HtmlToJson
                 /**
                  * 给pre标签添加hljs类名
                  */
-                if (tag == 'pre') {
-                  attrs.push({ name: 'class', value: 'hljs'});
+                if (tag === 'pre') {
+                    attrs.push({ name: 'class', value: 'hljs'});
                 }
+
                 if (attrs.length !== 0) {
                     node.attr = attrs.reduce(function (pre, attr) {
                         var name = attr.name;
                         var value = attr.value;
-                        if (name == 'class') {
-                            // console.dir(value);
-                            //  value = value.join("")
+                        if (name === 'class') {
                             node.classStr = value;
                         }
                         // has multi attibutes
                         // make it array of attribute
-                        if (name == 'style') {
-                            // console.dir(value);
-                            //  value = value.join("")
+                        if (name === 'style') {
                             node.styleStr = value;
                         }
-                        if (name == 'id') {
-                          node.id = value;
+                        if (name === 'id') {
+                            node.id = value;
                         }
                         if (value.match(/ /)) {
                             value = value.split(' ');
@@ -163,7 +113,7 @@ class HtmlToJson
                 if (node.tag === 'img') {
                     node.imgIndex = results.images.length;
                     var imgUrl = baseImageUrl + node.attr.src;
-                    if (imgUrl[0] == '') {
+                    if (imgUrl[0] === '') {
                         imgUrl.splice(0, 1);
                     }
                     imgUrl = wxDiscode.urlToHttpUrl(imgUrl, __placeImgeUrlHttps);
@@ -272,13 +222,64 @@ class HtmlToJson
     }
 
     /**
+     * 移除内容中的文档类型声明
+     *
+     * @param html string
+     */
+    static removeDOCTYPE(html) {
+        return html
+            .replace(/<\?xml.*\?>\n/, '')
+            .replace(/<.*!doctype.*\>\n/, '')
+            .replace(/<.*!DOCTYPE.*\>\n/, '');
+    }
+
+    /**
+     * 可能没用，不知道具体效果
+     * 目前没有使用
+     * @param html
+     * @returns {void | string | never}
+     */
+    static formatCode(html) {
+        html = html.replace(/&#39;/g, '\'');
+        return html.replace(/(<code[\s\S]*?>)([\s\S]*?)(<\/code>)/g, function (a, b, c) {
+            return hljs.highlightAuto(arguments[2]).value;
+        });
+    }
+
+    /**
+     * 删除注释内容
+     * 
+     * @param html string
+     */
+  static trimHtml(html) {
+     html = html
+      .replace(/<!--.*?-->/ig, '')
+      .replace(/\/\*.*?\*\//ig, '')
+      .replace(/[ ]+</ig, '<');
+      return html;
+  }
+
+  /**
+   * 配置emoji表情
+   * 
+   * @param reg pattern
+   * @param baseSrc string
+   * @param emojis object
+   */
+  static emojisInit(reg='', baseSrc="/wxParse/emojis/", emojis) {
+      __emojisReg = reg;
+      __emojisBaseSrc=baseSrc;
+      __emojis=emojis;
+  }
+
+    /**
      * 转换emoji字符串为表情图
      */
     static transEmojiStr(str){
         var emojiObjs = [];
 
         //如果正则表达式为空
-        if(__emojisReg.length == 0 || !__emojis){
+        if(__emojisReg.length === 0 || !__emojis){
             var emojiObj = {}
             emojiObj.node = "text";
             emojiObj.text = str;
