@@ -22,6 +22,10 @@ Component({
     lazyLoad: {
       type: Boolean,
       value: false
+    },
+    styleStr: {
+      type: String,
+      value: ''
     }
   },
 

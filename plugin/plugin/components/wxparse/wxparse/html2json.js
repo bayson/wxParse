@@ -227,10 +227,12 @@ class HtmlToJson
      * @param html string
      */
     static removeDOCTYPE(html) {
-        return html
-            .replace(/<\?xml.*\?>\n/, '')
-            .replace(/<.*!doctype.*\>\n/, '')
-            .replace(/<.*!DOCTYPE.*\>\n/, '');
+      html = html
+        .replace(/<\?xml.*?>\n?/g, '')
+        // .replace(/<\?xml.*\?>\n/, '')
+        .replace(/<.*!doctype.*\>\n/, '')
+        .replace(/<.*!DOCTYPE.*\>\n/, '');
+      return html;
     }
 
     /**
@@ -253,6 +255,8 @@ class HtmlToJson
      */
   static trimHtml(html) {
      html = html
+      .replace(/<SPAN[^>]*?>/g, '')
+      .replace(/<o:p>/g,'')
       .replace(/<!--.*?-->/ig, '')
       .replace(/\/\*.*?\*\//ig, '')
       .replace(/[ ]+</ig, '<');

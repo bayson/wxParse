@@ -1,6 +1,9 @@
 Page({
   data: {
-    html: "<span>aaaaaaaaaaaa</span><ruby>拼音<rt>pinyin</rt></ruby>issue#8<span>aaaaaaaaaaa</span>[01][100]<pre><code><?php\r\n$a = 'c';\r\n$b = 'd';\r\necho $a . $d;\r\n?></code></pre><code>$a=c;</code><img src='https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jp' />",
+    html: '<div><img src="https://avatars0.githubusercontent.com/u/26330957?s=88&v=4"></img></div>',
+    html4: '阿斯蒂芬<?xml:namespace prefix = "o" ns = "urn:schemas-microsoft-com:office:office" /><?xml:namespace prefix = "o" ns = "urn:schemas-microsoft-com:office:office" /><span>span</span><p>p</p>',
+    html2: "<p><img class=\"\" src=\"https://img12.360buyimg.com/cms/jfs/t29488/346/1568414027/265452/68fff56e/5ce63d8cN48d88a9c.jpg\" style=\"margin: 0px; padding: 0px; border: 0px; vertical-align: middle; color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);\"></span><img class=\"\" src=\"https://img10.360buyimg.com/cms/jfs/t30772/321/1661138764/260993/de485d80/5ce63d8dNcf1792aa.jpg\" style=\"margin: 0px; padding: 0px; border: 0px; vertical-align: middle; color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);\"></span><img class=\"\" src=\"https://img11.360buyimg.com/cms/jfs/t1/68249/2/218/358069/5ce63d8dE4f2830a1/e240bd61f42376b3.jpg\" style=\"margin: 0px; padding: 0px; border: 0px; vertical-align: middle; color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);\"></span><img class=\"\" src=\"https://img14.360buyimg.com/cms/jfs/t1/81416/40/208/262925/5ce63d8dE2292e4eb/b934151bbea37c19.jpg\" style=\"margin: 0px; padding: 0px; border: 0px; vertical-align: middle; color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);\"></span><img class=\"\" src=\"https://img14.360buyimg.com/cms/jfs/t1/40625/2/4976/498924/5ce63d8dEc8df9fc7/2e6e22f8a92affb6.jpg\" style=\"margin: 0px; padding: 0px; border: 0px; vertical-align: middle; color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);\"></span><img class=\"\" src=\"https://img10.360buyimg.com/cms/jfs/t30562/315/1618072658/323812/63d25c1c/5ce63d8dN2e37b1ab.jpg\" style=\"margin: 0px; padding: 0px; border: 0px; vertical-align: middle; color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);\"></span><img class=\"\" src=\"https://img12.360buyimg.com/cms/jfs/t1/51070/11/696/309834/5ce63d8dE42837747/5eb11ea86a863787.jpg\" style=\"margin: 0px; padding: 0px; border: 0px; vertical-align: middle; color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"/><span style=\"color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);\"></span><img class=\"\" src=\"https://img11.360buyimg.com/cms/jfs/t1/49216/26/670/207526/5ce63d8dE30e26eb2/9729694029ac8c28.jpg\" style=\"margin: 0px; padding: 0px; border: 0px; vertical-align: middle; color: rgb(102, 102, 102); font-family: tahoma, arial, &quot;Microsoft YaHei&quot;, &quot;Hiragino Sans GB&quot;, u5b8bu4f53, sans-serif; font-size: 12px; white-space: normal; background-color: rgb(255, 255, 255);\"/></p>",
+    h1tml: "<span>aaaaaaaaaaaa</span><ruby>拼音<rt>pinyin</rt></ruby>issue#8<span>aaaaaaaaaaa</span>[01][100]<pre><code><?php\r\n$a = 'c';\r\n$b = 'd';\r\necho $a . $d;\r\n?></code></pre><code>$a=c;</code><img src='https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jp' />",
 
     his: "<span style='font-family: 'PingFang SC'; color: rgb(51, 51, 51); background: rgb(255, 255, 255);'>issue#6</span><br/><img src='https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jpeg'>issue#7"
   },
@@ -8,21 +11,19 @@ Page({
    * 测试图片点击事件处理
    */
   handleTapImage: function (e) {
-    console.log(e)
+
   },
 
   /**
    * 测试图片加载事件
    */
   handleLoadImage: function (e) {
-    console.log(e)
   },
 
   /**
    * 测试图片加载出错事件
    */
   handleLoadImageError: function (e) {
-    console.log(e)
     e.detail.target.dataset.src ="https://img18.3lian.com/d/file/201709/21/f1c6153b5c97aaf7812c86d5da36e8c6.jpeg"
   }
 })

@@ -63,12 +63,9 @@ Component({
   lifetimes: {
     attached: function () {
       const self = this;
-      wx.getSystemInfo({
-        success: function (res) {
-          self.data.realWindowWidth = res.windowWidth;
-          self.data.realWindowHeight = res.windowHeight;
-        }
-      });
+      const systemInfo = wx.getSystemInfoSync();
+      self.data.realWindowWidth = systemInfo.windowWidth;
+      self.data.realWindowHeight = systemInfo.windowHeight;
     }
   },
 
@@ -139,6 +136,7 @@ Component({
       for (var i of index.split('.')) key += `.nodes[${i}]`;
       var keyW = key + '.width';
       var keyH = key + '.height';
+
       that.setData({
         [keyW]: recal.imageWidth,
         [keyH]: recal.imageheight,
@@ -155,7 +153,6 @@ Component({
       let urls = [];
       if (typeof (tagFrom) != 'undefined' && tagFrom.length > 0) {
         urls = self.data[tagFrom].imageUrls;
-        
         wx.previewImage({
           current: nowImgUrl, // 当前显示图片的http链接
           urls: self.data[tagFrom].imageUrls // 需要预览的图片http链接列表

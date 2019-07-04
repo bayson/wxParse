@@ -87,7 +87,6 @@
   white-space:pre;
   border: 1px solid #eee;
   padding: 0.5rem;
-  width: 100%;
 }
 .wxParse-big{font-size:1.17em}
 .wxParse-small,.wxParse-sub,.wxParse-sup{font-size:.83em}
@@ -171,6 +170,7 @@
     display: none;
 }
 .WxEmojiView{
+  word-wrap:break-word;
     align-items: center;
 }
 .wxEmoji{
