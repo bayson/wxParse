@@ -1,6 +1,5 @@
 # ianzhi/wxParse
 文档放在这里太长了，安装和使用方法到这里查看吧。
-最近有点小忙，回到家里实在不想写代码😄，发现的问题尽管放在issue里，大概下周会集中处理发现的问题~
 [文档地址](https://www.dnote.cn/users/ianzhi/posts/wxParsewendang)
 
 ## 可用属性
