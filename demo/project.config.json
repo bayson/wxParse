@@ -60,7 +60,7 @@
 					"id": 0,
 					"name": "详情页面",
 					"pathName": "pages/detail/detail",
-					"query": "id=108",
+					"query": "id=112",
 					"scene": null
 				},
 				{

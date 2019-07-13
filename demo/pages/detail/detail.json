@@ -2,6 +2,6 @@
   "navigationStyle": "custom",
   "navigationBarTitleText": "文章详情",
   "usingComponents": {
-    "wxparse": "../../wxparse/wxparse"
+    "wxparse": "/wxparse/wxparse"
   }
 }
