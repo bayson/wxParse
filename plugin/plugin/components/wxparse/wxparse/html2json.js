@@ -22,7 +22,7 @@ class HtmlToJson
      * @param baseImageUrl 图片的固定前缀
      * @param defaultImg 图片加载出错时的默认图片
      */
-    static html2json(html, bindName, baseImageUrl, defaultImg) {
+    static html2json(html, bindName, baseImageUrl, defaultImg, imgSuffix) {
         // 处理字符串
         html = HtmlToJson.removeDOCTYPE(html);
         html = HtmlToJson.trimHtml(html);
@@ -112,7 +112,7 @@ class HtmlToJson
                 //对img添加额外数据
                 if (node.tag === 'img') {
                     node.imgIndex = results.images.length;
-                    var imgUrl = baseImageUrl + node.attr.src;
+                    var imgUrl = baseImageUrl + node.attr.src + imgSuffix;
                     if (imgUrl[0] === '') {
                         imgUrl.splice(0, 1);
                     }

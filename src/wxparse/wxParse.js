@@ -13,7 +13,8 @@ class WxParse
     image: { // 解析图片时的一些扩展配置
       padding: 0,
       default: '',
-      prefix: ''
+      prefix: '',
+      suffix: ''
     },
     emoji: false // 是否将符号转义为emoji表情
   };
@@ -43,7 +44,7 @@ class WxParse
       let converter = new showdown.Converter();
       self.html = converter.makeHtml(self.data);
     }
-    bindData[self.config.bindName] = htmlToJson.html2json(self.html, self.config.bindName, self.config.image.prefix, self.config.image.default);
+    bindData[self.config.bindName] = htmlToJson.html2json(self.html, self.config.bindName, self.config.image.prefix, self.config.image.default, self.config.image.suffix);
     bindData[self.config.bindName].view = {};
     bindData[self.config.bindName].view.imagePadding = typeof (imagePadding) != 'undefined' ? imagePadding : 0;
 

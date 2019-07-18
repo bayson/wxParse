@@ -46,6 +46,13 @@ Component({
       observer: function () {
         this.render();
       }
+    },
+    imgSuffix: {
+      type:String,
+      value: '',
+      observer: function () {
+        this.render();
+      }
     }
   },
 
@@ -170,6 +177,7 @@ Component({
      */
     render: function () {
       const self = this;
+      console.log(self.properties)
 
       let parse = new wxparse(self.properties.data, self, {
         type: self.properties.type,
@@ -177,7 +185,8 @@ Component({
         image: {
           default: self.properties.defaultImg,
           prefix: self.properties.urlPrefix,
-          padding: self.properties.padding
+          padding: self.properties.padding,
+          suffix: self.properties.imgSuffix
         },
         emoji: self.properties.emoji
       });
