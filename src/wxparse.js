@@ -198,7 +198,8 @@ Component({
      * 处理链接点击事件
      */
     wxParseTagATap: function (e) {
-      wx.setClipboardData({ data: e.currentTarget.dataset.src });
+      this.triggerEvent('linkClick', e.currentTarget.dataset);
+      // wx.setClipboardData({ data: e.currentTarget.dataset.src });
     }
   }
 });
